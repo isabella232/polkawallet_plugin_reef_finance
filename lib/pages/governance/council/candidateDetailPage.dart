@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/council.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/council.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 import 'package:polkawallet_ui/components/accountInfo.dart';
@@ -15,7 +15,7 @@ import 'package:polkawallet_ui/utils/i18n.dart';
 class CandidateDetailPage extends StatefulWidget {
   CandidateDetailPage(this.plugin, this.keyring);
 
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
 
   static final String route = '/gov/candidate';

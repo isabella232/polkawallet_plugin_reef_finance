@@ -2,18 +2,18 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:polkawallet_plugin_kusama/common/components/chartLabel.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorRewardsChart.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/store/staking/types/validatorData.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/common/components/chartLabel.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorRewardsChart.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/store/staking/types/validatorData.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 
 class ValidatorChartsPage extends StatelessWidget {
   ValidatorChartsPage(this.plugin, this.keyring);
   static final String route = '/staking/validator/chart';
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
 
   Future<Map> _getValidatorRewardsData(String accountId) async {
@@ -32,7 +32,8 @@ class ValidatorChartsPage extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text(dic['validator.chart']),
+              title: Text('VVV'),
+              // title: Text(dic['validator.chart']),
               centerTitle: true,
             ),
             body: SafeArea(

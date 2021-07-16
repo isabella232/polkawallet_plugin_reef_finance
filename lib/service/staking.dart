@@ -1,15 +1,17 @@
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/store/index.dart';
-import 'package:polkawallet_plugin_kusama/utils/format.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/store/index.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/format.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/hexUtil.dart';
 import 'package:polkawallet_sdk/api/api.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
+import 'dart:math';
 
 class ApiStaking {
   ApiStaking(this.plugin, this.keyring)
       : api = plugin.sdk.api,
         store = plugin.store;
 
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   final PolkawalletApi api;
   final PluginStore store;
@@ -23,7 +25,13 @@ class ApiStaking {
   Future<Map> fetchAccountRewards(int eras) async {
     if (store.staking.ownStashInfo != null &&
         store.staking.ownStashInfo.stakingLedger != null) {
-      int bonded = store.staking.ownStashInfo.stakingLedger['active'];
+      int bonded=0;
+      dynamic rewardVal = store.staking.ownStashInfo.stakingLedger['active'];
+      if( rewardVal is String){
+        bonded = HexUtil.toDouble(rewardVal).toInt();
+      }else {
+        bonded = store.staking.ownStashInfo.stakingLedger['active'];
+      }
       List unlocking = store.staking.ownStashInfo.stakingLedger['unlocking'];
       if (bonded > 0 || unlocking.length > 0) {
         String address = store.staking.ownStashInfo.stashId;

@@ -1,45 +1,46 @@
-library polkawallet_plugin_kusama;
+library polkawallet_plugin_reef_finance;
 
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:polkawallet_plugin_kusama/common/constants.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/candidateDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/candidateListPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/councilPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/councilVotePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/motionDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/democracyPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/proposalDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/referendumVotePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/spendProposalPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/submitProposalPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/submitTipPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/tipDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/treasuryPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/bondExtraPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/controllerSelectPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/payoutPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/rebondPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/redeemPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/rewardDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/setControllerPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/setPayeePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/stakePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/stakingDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/unbondPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/nominatePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorChartsPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/service/index.dart';
-import 'package:polkawallet_plugin_kusama/store/cache/storeCache.dart';
-import 'package:polkawallet_plugin_kusama/store/index.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/common/constants.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/candidateDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/candidateListPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/councilPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/councilVotePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/motionDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/democracyPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/proposalDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/referendumVotePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/spendProposalPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/submitProposalPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/submitTipPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/tipDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/treasuryPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/bondExtraPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/controllerSelectPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/payoutPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/rebondPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/redeemPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/rewardDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/setControllerPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/setPayeePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/stakePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/stakingDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/unbondPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/nominatePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorChartsPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/service/index.dart';
+import 'package:polkawallet_plugin_reef_finance/store/cache/storeCache.dart';
+import 'package:polkawallet_plugin_reef_finance/store/index.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/api/types/networkParams.dart';
 import 'package:polkawallet_sdk/plugin/homeNavItem.dart';
 import 'package:polkawallet_sdk/plugin/index.dart';
@@ -50,33 +51,29 @@ import 'package:polkawallet_ui/pages/dAppWrapperPage.dart';
 import 'package:polkawallet_ui/pages/txConfirmPage.dart';
 import 'package:polkawallet_ui/pages/walletExtensionSignPage.dart';
 
-class PluginKusama extends PolkawalletPlugin {
+class PluginReefFinance extends PolkawalletPlugin {
   /// the kusama plugin support two networks: kusama & polkadot,
   /// so we need to identify the active network to connect & display UI.
-  PluginKusama({name = 'kusama'})
+  PluginReefFinance()
       : basic = PluginBasicData(
-          name: name,
-          genesisHash: name == network_name_kusama
-              ? genesis_hash_kusama
-              : genesis_hash_polkadot,
-          ss58: name == network_name_kusama ? 2 : 0,
-          primaryColor:
-              name == network_name_kusama ? kusama_black : Colors.pink,
-          gradientColor:
-              name == network_name_kusama ? Color(0xFF555555) : Colors.red,
+          name: 'Reef',
+          genesisHash: genesis_hash_reef,
+          ss58: 42,
+          primaryColor: reef_purple,
+          gradientColor: Color(0xFF2c024d),
           backgroundImage: AssetImage(
-              'packages/polkawallet_plugin_kusama/assets/images/public/bg_$name.png'),
+              'packages/polkawallet_plugin_reef_finance/assets/images/public/bg_reef.png'),
           icon: Image.asset(
-              'packages/polkawallet_plugin_kusama/assets/images/public/$name.png'),
+              'packages/polkawallet_plugin_reef_finance/assets/images/public/reef.png'),
           iconDisabled: Image.asset(
-              'packages/polkawallet_plugin_kusama/assets/images/public/${name}_gray.png'),
-          jsCodeVersion: 21001,
-          isTestNet: false,
+              'packages/polkawallet_plugin_reef_finance/assets/images/public/reef_gray.png'),
+          jsCodeVersion: 0,
+          // jsCodeVersion: 4171,
+          // jsCodeVersion: 21001,
+          // isTestNet: false,
         ),
-        recoveryEnabled = name == network_name_kusama,
-        _cache = name == network_name_kusama
-            ? StoreCacheKusama()
-            : StoreCachePolkadot();
+        recoveryEnabled = false,
+        _cache = StoreCacheReef();
 
   @override
   final PluginBasicData basic;
@@ -86,22 +83,19 @@ class PluginKusama extends PolkawalletPlugin {
 
   @override
   List<NetworkParams> get nodeList {
-    if (basic.name == network_name_polkadot) {
-      return _randomList(node_list_polkadot)
-          .map((e) => NetworkParams.fromJson(e))
-          .toList();
-    }
-    return _randomList(node_list_kusama)
+    return _randomList(node_list_reef)
         .map((e) => NetworkParams.fromJson(e))
         .toList();
   }
 
   @override
   final Map<String, Widget> tokenIcons = {
+    'REEF': Image.asset(
+        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/REEF.png'),
     'KSM': Image.asset(
-        'packages/polkawallet_plugin_kusama/assets/images/tokens/KSM.png'),
+        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/KSM.png'),
     'DOT': Image.asset(
-        'packages/polkawallet_plugin_kusama/assets/images/tokens/DOT.png'),
+        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/DOT.png'),
   };
 
   @override
@@ -111,11 +105,11 @@ class PluginKusama extends PolkawalletPlugin {
       return HomeNavItem(
         text: dic[e],
         icon: SvgPicture.asset(
-          'packages/polkawallet_plugin_kusama/assets/images/public/nav_$e.svg',
+          'packages/polkawallet_plugin_reef_finance/assets/images/public/nav_$e.svg',
           color: Theme.of(context).disabledColor,
         ),
         iconActive: SvgPicture.asset(
-          'packages/polkawallet_plugin_kusama/assets/images/public/nav_$e.svg',
+          'packages/polkawallet_plugin_reef_finance/assets/images/public/nav_$e.svg',
           color: basic.primaryColor,
         ),
         content: e == 'staking' ? Staking(this, keyring) : Gov(this),
@@ -166,7 +160,9 @@ class PluginKusama extends PolkawalletPlugin {
   }
 
   @override
-  Future<String> loadJSCode() => null;
+  // Future<String> loadJSCode() => null;
+  Future<String> loadJSCode() => rootBundle.loadString(
+  'packages/polkawallet_plugin_reef_finance/lib/js_api/dist/main.js');
 
   PluginStore _store;
   PluginApi _service;
@@ -177,9 +173,7 @@ class PluginKusama extends PolkawalletPlugin {
 
   @override
   Future<void> onWillStart(Keyring keyring) async {
-    await GetStorage.init(basic.name == network_name_polkadot
-        ? plugin_polkadot_storage_key
-        : plugin_kusama_storage_key);
+    await GetStorage.init(plugin_reef_storage_key);
 
     _store = PluginStore(_cache);
 
@@ -189,10 +183,10 @@ class PluginKusama extends PolkawalletPlugin {
       _store.staking.loadCache(keyring.current.pubKey);
       _store.gov.clearState();
       _store.gov.loadCache();
-      print('kusama plugin cache data loaded');
+      print('reef plugin cache data loaded');
     } catch (err) {
       print(err);
-      print('load kusama cache data failed');
+      print('load reef cache data failed');
     }
 
     _service = PluginApi(this, keyring);

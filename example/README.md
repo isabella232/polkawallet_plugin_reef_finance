@@ -1,6 +1,6 @@
 # example
 
-polkawallet_plugin_kusama_example.
+polkawallet_plugin_reef_finance_example.
 
 ## Getting Started
 

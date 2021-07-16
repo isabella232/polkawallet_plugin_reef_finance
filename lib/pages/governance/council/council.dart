@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:polkawallet_plugin_kusama/common/components/infoItem.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/candidateDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/councilVotePage.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/common/components/infoItem.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/candidateDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/councilVotePage.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 import 'package:polkawallet_ui/components/addressIcon.dart';
 import 'package:polkawallet_ui/components/borderedTitle.dart';
@@ -21,7 +21,7 @@ import 'package:polkawallet_ui/utils/index.dart';
 
 class Council extends StatefulWidget {
   Council(this.plugin);
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
 
   @override
   State<StatefulWidget> createState() => _CouncilState();

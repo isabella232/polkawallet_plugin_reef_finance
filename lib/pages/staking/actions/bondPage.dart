@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/setPayeePage.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/setPayeePage.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/storage/types/keyPairData.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
@@ -16,7 +16,7 @@ import 'package:polkawallet_ui/utils/index.dart';
 
 class BondPage extends StatefulWidget {
   BondPage(this.plugin, this.keyring, {this.onNext});
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   final Function(TxConfirmParams) onNext;
   @override

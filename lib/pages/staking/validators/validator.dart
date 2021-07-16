@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/store/staking/types/validatorData.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/store/staking/types/validatorData.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 import 'package:polkawallet_ui/components/addressIcon.dart';
 import 'package:polkawallet_ui/utils/format.dart';

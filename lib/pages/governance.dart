@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/council/councilPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/democracyPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/treasury/treasuryPage.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/council/councilPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/democracyPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/treasury/treasuryPage.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/plugin/index.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 import 'package:polkawallet_ui/components/entryPageCard.dart';
@@ -64,7 +64,7 @@ class Gov extends StatelessWidget {
                               dic['democracy'],
                               dic['democracy.brief'],
                               SvgPicture.asset(
-                                'packages/polkawallet_plugin_kusama/assets/images/gov/democracy.svg',
+                                'packages/polkawallet_plugin_reef_finance/assets/images/gov/democracy.svg',
                                 width: 96,
                                 color: Theme.of(context).primaryColor,
                               ),
@@ -81,7 +81,7 @@ class Gov extends StatelessWidget {
                               dic['council'],
                               dic['council.brief'],
                               SvgPicture.asset(
-                                'packages/polkawallet_plugin_kusama/assets/images/gov/council.svg',
+                                'packages/polkawallet_plugin_reef_finance/assets/images/gov/council.svg',
                                 width: 96,
                                 color: Theme.of(context).primaryColor,
                               ),
@@ -98,7 +98,7 @@ class Gov extends StatelessWidget {
                               dic['treasury'],
                               dic['treasury.brief'],
                               SvgPicture.asset(
-                                'packages/polkawallet_plugin_kusama/assets/images/gov/treasury.svg',
+                                'packages/polkawallet_plugin_reef_finance/assets/images/gov/treasury.svg',
                                 width: 96,
                                 color: Theme.of(context).primaryColor,
                               ),
@@ -108,14 +108,14 @@ class Gov extends StatelessWidget {
                                 .pushNamed(TreasuryPage.route),
                           ),
                         ),
-                        Padding(
+                        /*Padding(
                           padding: EdgeInsets.only(bottom: 16),
                           child: GestureDetector(
                             child: EntryPageCard(
                               'Polkassembly',
                               dic['polkassembly'],
                               Image.asset(
-                                'packages/polkawallet_plugin_kusama/assets/images/public/polkassembly.png',
+                                'packages/polkawallet_plugin_reef_finance/assets/images/public/polkassembly.png',
                                 width: 48,
                               ),
                               color: Colors.transparent,
@@ -127,7 +127,7 @@ class Gov extends StatelessWidget {
                               // "https://polkadot.js.org/apps/",
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
             )

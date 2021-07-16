@@ -4,19 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/bondExtraPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/payoutPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/rebondPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/redeemPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/rewardDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/rewardsChart.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/setControllerPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/setPayeePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/stakePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/stakingDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/unbondPage.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/bondExtraPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/payoutPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/rebondPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/redeemPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/rewardDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/rewardsChart.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/setControllerPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/setPayeePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/stakePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/stakingDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/unbondPage.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/api/subscan.dart';
 import 'package:polkawallet_sdk/api/types/staking/ownStashInfo.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
@@ -34,7 +34,7 @@ import 'package:polkawallet_ui/utils/index.dart';
 
 class StakingActions extends StatefulWidget {
   StakingActions(this.plugin, this.keyring);
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   @override
   _StakingActions createState() => _StakingActions();
@@ -127,9 +127,9 @@ class _StakingActions extends State<StakingActions> {
             padding: EdgeInsets.only(top: 4),
             child: i.success
                 ? SvgPicture.asset(
-                    'packages/polkawallet_plugin_kusama/assets/images/staking/ok.svg')
+                    'packages/polkawallet_plugin_reef_finance/assets/images/staking/ok.svg')
                 : SvgPicture.asset(
-                    'packages/polkawallet_plugin_kusama/assets/images/staking/error.svg'),
+                    'packages/polkawallet_plugin_reef_finance/assets/images/staking/error.svg'),
           ),
           title: Text(i.call),
           subtitle: Text(Fmt.dateTime(
@@ -203,7 +203,7 @@ class _StakingActions extends State<StakingActions> {
             width: 32,
             padding: EdgeInsets.only(top: 4),
             child: SvgPicture.asset(
-                'packages/polkawallet_plugin_kusama/assets/images/staking/${isReward ? 'reward' : 'slash'}.svg'),
+                'packages/polkawallet_plugin_reef_finance/assets/images/staking/${isReward ? 'reward' : 'slash'}.svg'),
           ),
           title: Text(i.eventId),
           subtitle: Text(Fmt.dateTime(

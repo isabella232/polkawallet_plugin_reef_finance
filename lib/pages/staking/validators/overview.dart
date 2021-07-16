@@ -2,17 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/bondExtraPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/stakePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/nominatePage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validator.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorDetailPage.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/validators/validatorListFilter.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/service/walletApi.dart';
-import 'package:polkawallet_plugin_kusama/store/staking/types/validatorData.dart';
-import 'package:polkawallet_plugin_kusama/utils/format.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/bondExtraPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/stakePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/nominatePage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validator.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorDetailPage.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/validators/validatorListFilter.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/service/walletApi.dart';
+import 'package:polkawallet_plugin_reef_finance/store/staking/types/validatorData.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/format.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/hexUtil.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/api/types/staking/ownStashInfo.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
@@ -32,7 +33,7 @@ const validator_list_page_size = 100;
 
 class StakingOverviewPage extends StatefulWidget {
   StakingOverviewPage(this.plugin, this.keyring);
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   @override
   _StakingOverviewPageState createState() => _StakingOverviewPageState();
@@ -182,7 +183,7 @@ class _StakingOverviewPageState extends State<StakingOverviewPage> {
     bool isController = false;
     bool isStash = true;
     if (hashData) {
-      bonded = int.parse(stashInfo.stakingLedger['active'].toString());
+      bonded = HexUtil.toDouble(stashInfo.stakingLedger['active'].toString()).toInt();
       nominators = stashInfo.nominating.toList();
       if (nominators.length > 0) {
         nominatorListHeight = double.parse((nominators.length * 56).toString());

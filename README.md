@@ -1,4 +1,4 @@
-# polkawallet_plugin_kusama
+# polkawallet_plugin_reef_finance
 
 Basic plugin for polkawallet/app. Support Polkadot & Kusama.
 

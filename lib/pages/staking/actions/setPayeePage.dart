@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/api/types/staking/ownStashInfo.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/storage/types/keyPairData.dart';
@@ -16,7 +16,7 @@ import 'package:polkawallet_ui/components/txButton.dart';
 class SetPayeePage extends StatefulWidget {
   SetPayeePage(this.plugin, this.keyring);
   static final String route = '/staking/payee';
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   @override
   _SetPayeePageState createState() => _SetPayeePageState();
@@ -141,7 +141,7 @@ class PayeeSelector extends StatefulWidget {
 
   static const options = ['Staked', 'Stash', 'Controller', 'Account'];
 
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   final OwnStashInfoData initialValue;
   final Function(int, String) onChange;

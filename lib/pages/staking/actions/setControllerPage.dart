@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:polkawallet_plugin_kusama/pages/staking/actions/controllerSelectPage.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/staking/actions/controllerSelectPage.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/storage/types/keyPairData.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
@@ -12,7 +12,7 @@ import 'package:polkawallet_ui/components/txButton.dart';
 class SetControllerPage extends StatefulWidget {
   SetControllerPage(this.plugin, this.keyring);
   static final String route = '/staking/controller';
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
   @override
   _SetControllerPageState createState() => _SetControllerPageState();

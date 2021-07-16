@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/democracy.dart';
-import 'package:polkawallet_plugin_kusama/pages/governance/democracy/proposals.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama/utils/i18n/index.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/democracy.dart';
+import 'package:polkawallet_plugin_reef_finance/pages/governance/democracy/proposals.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance/utils/i18n/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
 import 'package:polkawallet_ui/ui.dart';
@@ -10,7 +10,7 @@ import 'package:polkawallet_ui/components/topTaps.dart';
 
 class DemocracyPage extends StatefulWidget {
   DemocracyPage(this.plugin, this.keyring);
-  final PluginKusama plugin;
+  final PluginReefFinance plugin;
   final Keyring keyring;
 
   static const String route = '/gov/democracy/index';

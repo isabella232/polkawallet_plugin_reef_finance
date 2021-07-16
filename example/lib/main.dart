@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:polkawallet_plugin_kusama_example/pages/assetsContent.dart';
-import 'package:polkawallet_plugin_kusama_example/pages/profileContent.dart';
-import 'package:polkawallet_plugin_kusama_example/pages/selectListPage.dart';
+import 'package:polkawallet_plugin_reef_finance_example/pages/assetsContent.dart';
+import 'package:polkawallet_plugin_reef_finance_example/pages/profileContent.dart';
+import 'package:polkawallet_plugin_reef_finance_example/pages/selectListPage.dart';
 
 import 'package:polkawallet_sdk/api/types/networkParams.dart';
 import 'package:polkawallet_sdk/plugin/index.dart';
 import 'package:polkawallet_sdk/storage/keyring.dart';
 import 'package:polkawallet_sdk/storage/types/keyPairData.dart';
 import 'package:polkawallet_sdk/utils/i18n.dart';
-import 'package:polkawallet_plugin_kusama/polkawallet_plugin_kusama.dart';
-import 'package:polkawallet_plugin_kusama_example/pages/homePage.dart';
+import 'package:polkawallet_plugin_reef_finance/polkawallet_plugin_reef_finance.dart';
+import 'package:polkawallet_plugin_reef_finance_example/pages/homePage.dart';
 import 'package:polkawallet_ui/components/passwordInputDialog.dart';
 import 'package:polkawallet_ui/pages/accountListPage.dart';
 import 'package:polkawallet_ui/pages/qrSenderPage.dart';
@@ -20,8 +20,8 @@ import 'package:polkawallet_ui/pages/txConfirmPage.dart';
 
 void main() {
   final _plugins = [
-    PluginKusama(name: 'polkadot'),
-    PluginKusama(),
+    PluginReefFinance(name: 'polkadot'),
+    PluginReefFinance(),
   ];
 
   runApp(MyApp(_plugins));
