@@ -1,12 +1,15 @@
 import { ApiPromise } from "@polkadot/api";
-import { DeriveCollectiveProposal, DeriveReferendumExt, DeriveCouncilVotes } from "@polkadot/api-derive/types";
+import {
+  DeriveCollectiveProposal,
+  DeriveReferendumExt,
+  DeriveCouncilVotes,
+  DeriveDemocracyLock, DeriveProposal, DeriveBalancesAccount, DeriveTreasuryProposals
+} from '@polkadot/api-derive/types';
 import { SubmittableExtrinsic } from "@polkadot/api/types";
-import { GenericCall, getTypeDef, Option } from "@polkadot/types";
-import { CallFunction } from "@polkadot/types/types";
-import { OpenTip, AccountId, FunctionMetadataLatest } from "@polkadot/types/interfaces";
+import { GenericCall, getTypeDef, Option, Bytes } from "@polkadot/types";
+import {OpenTip, AccountId, FunctionMetadataLatest, BlockNumber} from '@polkadot/types/interfaces';
 import { formatBalance, stringToU8a, BN_ZERO, hexToString } from "@polkadot/util";
 import BN from "bn.js";
-
 import { approxChanges } from "../utils/referendumApproxChanges";
 
 function _extractMetaData(value: FunctionMetadataLatest) {
@@ -53,13 +56,15 @@ function _transfromProposalMeta(proposal: any): {} {
  * Query active referendums and it's voting info of an address.
  */
 async function fetchReferendums(api: ApiPromise, address: string) {
-  const referendums: DeriveReferendumExt[] = await api.derive.democracy.referendums();
+  const referendums: DeriveReferendumExt[] = await api.derive.democracy.referendums() as DeriveReferendumExt[];
   const sqrtElectorate = await api.derive.democracy.sqrtElectorate();
   const details = referendums.map(({ image, imageHash, status, votedAye, votedNay, votedTotal, votes }) => {
     let proposalMeta: any = {};
     let parsedMeta: any = {};
     if (image && image.proposal) {
-      proposalMeta = _extractMetaData(image.proposal.registry.findMetaCall(image.proposal.callIndex).meta);
+      let findMetaCall = image.proposal.registry.findMetaCall(image.proposal.callIndex);
+      // @ts-ignore
+      proposalMeta = _extractMetaData(findMetaCall.meta);
       parsedMeta = _transfromProposalMeta(image.proposal);
       image.proposal = image.proposal.toHuman() as any;
       if (image.proposal?.method == "setCode") {
@@ -71,6 +76,7 @@ async function fetchReferendums(api: ApiPromise, address: string) {
       }
     }
 
+    // @ts-ignore
     const changes = approxChanges(status.threshold, sqrtElectorate, {
       votedAye,
       votedNay,
@@ -128,7 +134,7 @@ async function getReferendumVoteConvictions(api: ApiPromise) {
  * Query active Proposals.
  */
 async function fetchProposals(api: ApiPromise) {
-  const proposals = await api.derive.democracy.proposals();
+  const proposals = await api.derive.democracy.proposals() as DeriveProposal[];
   return proposals.map((e) => {
     if (e.image && e.image.proposal) {
       e.image.proposal = _transfromProposalMeta(e.image.proposal) as any;
@@ -141,7 +147,7 @@ async function fetchProposals(api: ApiPromise) {
  * Query votes of council members and candidates.
  */
 async function fetchCouncilVotes(api: ApiPromise) {
-  const councilVotes: DeriveCouncilVotes = await api.derive.council.votes();
+  const councilVotes: DeriveCouncilVotes = await api.derive.council.votes() as DeriveCouncilVotes;
   return councilVotes.reduce((result, [voter, { stake, votes }]) => {
     const res: any = { ...result };
     votes.forEach((candidate) => {
@@ -160,8 +166,9 @@ const TREASURY_ACCOUNT = stringToU8a("modlpy/trsry".padEnd(32, "\0"));
  * Query overview of treasury and spend proposals.
  */
 async function getTreasuryOverview(api: ApiPromise) {
-  const proposals = await api.derive.treasury.proposals();
-  const balance = await api.derive.balances.account(TREASURY_ACCOUNT as AccountId);
+  const proposals = await api.derive.treasury.proposals() as DeriveTreasuryProposals;
+  // @ts-ignore
+  const balance = await api.derive.balances.account(TREASURY_ACCOUNT) as DeriveBalancesAccount;
   const res: any = {
     ...proposals,
   };
@@ -184,9 +191,11 @@ async function getTreasuryOverview(api: ApiPromise) {
  * Query tips of treasury.
  */
 async function getTreasuryTips(api: ApiPromise) {
-  const tipKeys = await api.query.treasury.tips.keys();
+  // @ts-ignore
+  const tipKeys = await (api.query.tips || api.query.treasury).tips.keys();
   const tipHashes = tipKeys.map((key) => key.args[0].toHex());
-  const optTips = (await api.query.treasury.tips.multi(tipHashes)) as Option<OpenTip>[];
+  // @ts-ignore
+  const optTips = (await (api.query.tips || api.query.treasury).tips.multi(tipHashes)) as Option<OpenTip>[];
   const tips = optTips
     .map((opt, index) => [tipHashes[index], opt.unwrapOr(null)])
     .filter((val) => !!val[1])
@@ -194,7 +203,7 @@ async function getTreasuryTips(api: ApiPromise) {
   return Promise.all(
     tips.map(async (tip: any[]) => {
       const detail = tip[1].toJSON();
-      const reason = await api.query.treasury.reasons(detail.reason);
+      const reason = (await (api.query.tips || api.query.treasury).reasons(detail.reason)) as Option<Bytes>;
       const tips = detail.tips.map((e: any) => ({
         address: e[0],
         value: e[1],
@@ -223,7 +232,7 @@ async function makeTreasuryProposalSubmission(api: ApiPromise, id: any, isReject
  * Query motions of council.
  */
 async function getCouncilMotions(api: ApiPromise) {
-  const motions: DeriveCollectiveProposal[] = await api.derive.council.proposals();
+  const motions = await api.derive.council.proposals() as DeriveCollectiveProposal[];
   const res: any[] = [];
   motions.forEach((e) => {
     res.push({
@@ -236,7 +245,7 @@ async function getCouncilMotions(api: ApiPromise) {
 
 async function getDemocracyUnlocks(api: ApiPromise, address: string) {
   const locks = await Promise.all([api.derive.chain.bestNumber(), api.derive.democracy.locks(address)]);
-  return locks[1].filter(({ isFinished, unlockAt }) => isFinished && locks[0].gt(unlockAt)).map(({ referendumId }) => referendumId);
+  return (locks[1] as DeriveDemocracyLock[]).filter(({ isFinished, unlockAt }) => isFinished && (locks[0] as BlockNumber).gt(unlockAt)).map(({ referendumId }) => referendumId);
 }
 
 export default {
