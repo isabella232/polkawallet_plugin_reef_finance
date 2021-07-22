@@ -83,7 +83,7 @@ class ValidatorDetailPage extends StatelessWidget {
                                 address: detail.accountId,
                                 icon: accIcon,
                               ),
-                              GestureDetector(
+                              /*GestureDetector(
                                 child: Container(
                                   margin: EdgeInsets.only(top: 24, right: 24),
                                   child: Row(
@@ -103,7 +103,7 @@ class ValidatorDetailPage extends StatelessWidget {
                                 onTap: () => Navigator.of(context).pushNamed(
                                     ValidatorChartsPage.route,
                                     arguments: detail),
-                              ),
+                              ),*/
                             ],
                           ),
                           Divider(),

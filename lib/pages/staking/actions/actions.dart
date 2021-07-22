@@ -440,6 +440,13 @@ class _StakingActions extends State<StakingActions> {
             ),
           ),
         ];
+        // TODO remove when we are listed on subscan.io
+        return ListView.builder(
+            controller: _scrollController,
+            itemCount: 1,
+            itemBuilder: (_, int i) {
+              return list[i];
+            });
         list.addAll(_tab == 0 ? _buildTxList() : _buildRewardsList());
         return RefreshIndicator(
           key: _refreshKey,

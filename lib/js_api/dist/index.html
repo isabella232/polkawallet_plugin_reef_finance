@@ -1,5 +1,25 @@
 <html>
-  <body>
+<head>
     <script src="main.js"></script>
-  </body>
+</head>
+<body>
+<script>
+    async function init(){
+        await window.settings.connect([
+            'wss://kusama.elara.patract.io'
+            // 'wss://rpc-testnet.reefscan.com/ws'
+        ]);
+        console.log('GGG', api.consts)
+        console.log('TXX1', api.tx.electionsPhragmen)
+        console.log('TXX2', api.tx.elections)
+        console.log('TXX3', api.tx.phragmenElection)
+        // let referendumVoteConvictions = await window.gov.getReferendumVoteConvictions(window.api);
+        console.log('api=', referendumVoteConvictions)
+        // api.tx.staking.payoutStakers("5GVoNsTMNaWGw1ygPTQa6YQd8i255hF9aRLM9wRK9GFv3ebZ", 0x00000044)
+    }
+
+    init();
+
+</script>
+</body>
 </html>

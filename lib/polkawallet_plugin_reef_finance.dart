@@ -52,12 +52,11 @@ import 'package:polkawallet_ui/pages/txConfirmPage.dart';
 import 'package:polkawallet_ui/pages/walletExtensionSignPage.dart';
 
 class PluginReefFinance extends PolkawalletPlugin {
-  /// the kusama plugin support two networks: kusama & polkadot,
-  /// so we need to identify the active network to connect & display UI.
+  static const production = false;
   PluginReefFinance()
       : basic = PluginBasicData(
           name: 'Reef',
-          genesisHash: genesis_hash_reef,
+          genesisHash: PluginReefFinance.production?genesis_hash_reef:genesis_hash_reef_testnet,
           ss58: 42,
           primaryColor: reef_purple,
           gradientColor: Color(0xFF2c024d),
@@ -68,9 +67,7 @@ class PluginReefFinance extends PolkawalletPlugin {
           iconDisabled: Image.asset(
               'packages/polkawallet_plugin_reef_finance/assets/images/public/reef_gray.png'),
           jsCodeVersion: 0,
-          // jsCodeVersion: 4171,
-          // jsCodeVersion: 21001,
-          // isTestNet: false,
+          isTestNet: !PluginReefFinance.production,
         ),
         recoveryEnabled = false,
         _cache = StoreCacheReef();
@@ -83,7 +80,7 @@ class PluginReefFinance extends PolkawalletPlugin {
 
   @override
   List<NetworkParams> get nodeList {
-    return _randomList(node_list_reef)
+    return _randomList(PluginReefFinance.production ? node_list_reef: node_list_reef_testnet)
         .map((e) => NetworkParams.fromJson(e))
         .toList();
   }
@@ -91,11 +88,7 @@ class PluginReefFinance extends PolkawalletPlugin {
   @override
   final Map<String, Widget> tokenIcons = {
     'REEF': Image.asset(
-        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/REEF.png'),
-    'KSM': Image.asset(
-        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/KSM.png'),
-    'DOT': Image.asset(
-        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/DOT.png'),
+        'packages/polkawallet_plugin_reef_finance/assets/images/tokens/REEF.png')
   };
 
   @override
@@ -204,7 +197,7 @@ class PluginReefFinance extends PolkawalletPlugin {
 
   List _randomList(List input) {
     final data = input.toList();
-    final res = List();
+    final res = [];
     final _random = Random();
     for (var i = 0; i < input.length; i++) {
       final item = data[_random.nextInt(data.length)];

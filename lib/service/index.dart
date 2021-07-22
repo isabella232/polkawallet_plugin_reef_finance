@@ -34,9 +34,11 @@ class PluginApi {
   }
 
   Future<String> getRuntimeModuleName(List<String> modules) async {
-    final res = await Future.wait(modules.map((e) =>
-        plugin.sdk.webView.evalJavascript('(api.tx.$e != undefined ? {} : null)', wrapPromise: false)));
-    print(res);
+    final res = await Future.wait(modules.map((e) {
+      print('MOD NNN=$e');
+        return plugin.sdk.webView.evalJavascript('(api.tx.$e != undefined ? {} : null)', wrapPromise: false);
+    }));
+    print('GET RNT MOD NAME= $res');
     return modules[res.indexWhere((e) => e != null)];
   }
 }

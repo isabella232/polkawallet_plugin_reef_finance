@@ -116,6 +116,7 @@ const PERIODS = {
  * Query ReferendumVoteConvictions.
  */
 async function getReferendumVoteConvictions(api: ApiPromise) {
+
   const enact =
     (((((<any>PERIODS)[api.genesisHash.toHex()] || api.consts.democracy.enactmentPeriod).toNumber() *
       api.consts.timestamp.minimumPeriod.toNumber()) /
